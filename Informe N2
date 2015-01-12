@@ -1,0 +1,42 @@
+#### Gráficos Producto N2 ####
+# Indicadores vs Región
+library(ggplot2)
+
+var <- c
+
+
+var <-c("Codigo", "Nombre", "Formacion posgrado", "Posgrado en formacion", "Doctores TC", 
+"Estudiantes por docente TC", "Horas clase TC", "Porcentaje de profesores TC", 
+"Horas clase MT/TP", "Titularidad", "Titularidad TC", "Concurso", "Escalafon", "Evaluacion",
+"Remuneracion TC", "Remuneracion MT/TP", "Dirección mujeres", "Docencia.mujeres",
+"Eficiencia.terminal.posgrado", "Eficiencia.terminal.pregrado",
+"Tasa.de.retenci.n.inicial.pregrado", "Admisi.n.a.estudios.de.pregrado",    
+"Admisi.n.a.estudios.de.posgrado", "Planificaci.n.de.la.investigaci.n",
+"Investigaci.n.regional", "Producci.n.cient.fica",     
+"Libros.revisados.por.pares", "Uso.del.seguimiento.a.graduados",  
+"Programas.de.vinculaci.n", "Presupuesto.de.programas.de.vinculaci.n",
+"Rendici.n.anual.de.cuentas", "Transparencia.financiera", "X.tica.y.responsabilidad", 
+"Calidad.del.gasto", "Informaci.n.para.la.evaluaci.n", "R.gimen.acad.mico",             
+"Acci.n.afirmativa", "Espacio.para.estudiantes", "T.tulos.de.libros", "Gesti.n.de.biblioteca",               
+"Consultas.por.usuario", "Conectividad", "Innovaci.n.tecnol.gica", "Cobertura.a.estudiantes",      
+"Calidad.de.aulas", "Oficinas.TC", "Oficinas.MT.TP", "Espacios.de.bienestar",                 
+"oferta", "mantenimiento", "INSTITUCION", "CA08", "CA05", "CA03", "CA01", "CA02", "CA07", "CA09",                             
+"CA10", "region", "Academia", "Organizacion","Investigacion", "Infraestructura",                      
+"Eficiencia", "factor_ponderacion", "valoracion", "nueva_valoracion", "ctgr")
+
+i <- 3
+
+mypath <- file.path("","Users","Diego","Dropbox","Proyectos","Ceaaces","Informes",
+                    paste(var[i], ".png", sep = ""))
+png(file=mypath)
+ggplot(data_new, aes(x=data_new[,60], y=data_new[,i], fill=as.factor(data_new[,60]))) + 
+  geom_boxplot(outlier.colour="red",outlier.shape=16, outlier.size=4) + labs(x=" ") + 
+  labs(y="Indicador")+stat_boxplot(geom ='errorbar') + labs(fill=" ") + labs(title=var[i])+
+  scale_fill_manual(values=colores) + theme(legend.position="none") + theme(text = element_text(size=15))
+dev.off()
+
+
++ geom_text(data = aggregate(data_new[,i] ~ data_new[,60], data_new, function(i) round(median(i),2)), 
+            aes(label = data_new[,i], family=c("serif")), position = position_dodge(width=0.5), 
+            colour="ghostwhite", size=7)
+dev.off()
