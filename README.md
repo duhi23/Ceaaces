@@ -1,4 +1,0 @@
-Ceaaces
-=======
-
-Script - analisis data
