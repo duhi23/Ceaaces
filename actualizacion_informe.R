@@ -15,6 +15,12 @@ data_two <- read.xls("Resultados pre y posgrado.xls", sheet=1, header=TRUE)
 
 ## Realizamos el producto con sus pesos
 
+pesos_pos <- data_pos[1,]
+pesos_pre <- data_pre[1,]
+pesos_two <- data_two[1,]
+
+
+
 str(data_two)
 
 head(data_two)
