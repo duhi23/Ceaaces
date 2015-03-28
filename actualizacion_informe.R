@@ -3,6 +3,24 @@
 old.dir <- "/Users/Diego/Dropbox/Proyectos/Ceaaces"
 new.dir <- "/Users/Diego/Dropbox/Proyectos/Ceaaces/Datos"
 
+setwd(new.dir)
+list.files()
+
+## Cargamos los archivos originales
+options(stringsAsFactors=FALSE)
+library(gdata)
+data_pos <- read.xls("Resultados posgrado.xls", sheet=1, header=TRUE)
+data_pre <- read.xls("Resultados pregrado.xls", sheet=1, header=TRUE)
+data_two <- read.xls("Resultados pre y posgrado.xls", sheet=1, header=TRUE)
+
+## Realizamos el producto con sus pesos
+
+str(data_two)
+
+head(data_two)
+
+
+
 ## Reciclamos variables utilizadas vcomo filtros de la base anterior
 #write.table(data_new, file="base_anterior.txt", row.names=FALSE, sep=";", dec=",")
 
