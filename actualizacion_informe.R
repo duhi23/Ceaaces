@@ -9,22 +9,12 @@ list.files()
 ## Cargamos los archivos originales
 options(stringsAsFactors=FALSE)
 library(gdata)
-data_pos <- read.xls("Resultados posgrado.xls", sheet=1, header=TRUE)
-data_pre <- read.xls("Resultados pregrado.xls", sheet=1, header=TRUE)
-data_two <- read.xls("Resultados pre y posgrado.xls", sheet=1, header=TRUE)
-
-## Realizamos el producto con sus pesos
-
-pesos_pos <- data_pos[1,]
-pesos_pre <- data_pre[1,]
-pesos_two <- data_two[1,]
-
-
-
-str(data_two)
+base <- read.xls("puntajes_ponderados.xlsx", sheet=1, header=TRUE)
+str(base)
 
 head(data_two)
 
+plot(base$Evaluacion.Global.IES)
 
 
 ## Reciclamos variables utilizadas vcomo filtros de la base anterior
