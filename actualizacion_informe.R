@@ -32,6 +32,7 @@ var <- c("Codigo", "Evaluacion Global IES", "Academia meta", "Eficiencia Academi
                "mantenimiento", "CA08", "CA05", "CA03", "CA01", "CA02", "CA07", "CA09", "CA10", "region")
 
 library(ggplot2)
+library(stringr)
 
 for(i in c(3:7)){
   mypath <- file.path("","Users","Diego","Dropbox","Proyectos","Ceaaces","Actualizacion",
@@ -48,13 +49,17 @@ for(i in c(3:7)){
   dev.off()
 }
 
+est <- function(i){
+  val <- rbind(aggregate(base[,i] ~ base[,73], base, function(i) round(min(i),4))[,2], # min
+               aggregate(base[,i] ~ base[,73], base, function(i) round(max(i),4))[,2], # max
+               aggregate(base[,i] ~ base[,73], base, function(i) round(median(i),4))[,2], # median
+               aggregate(base[,i] ~ base[,73], base, function(i) round(sd(i),4))[,2], # sd
+               aggregate(base[,i] ~ base[,73], base, function(i) round(IQR(i),4))[,2], # IQR
+               aggregate(base[,i] ~ base[,73], base, function(i) round(quantile(i, probs=0.25),4))[,2], # Q1
+               aggregate(base[,i] ~ base[,73], base, function(i) round(quantile(i, probs=0.75),4))[,2]) # Q3
+  result <- cbind(c("min", "max", "median", "sd", "IQR", "Q1", "Q3"), as.data.frame(val))
+  colnames(result) <- c("nom", unlist(dimnames(table(base[,73]))))
+  return(result)
+}
 
-val <- rbind(aggregate(base[,i] ~ base[,73], base, function(i) round(min(i),4))[,2], # min
-aggregate(base[,i] ~ base[,73], base, function(i) round(max(i),4))[,2], # max
-aggregate(base[,i] ~ base[,73], base, function(i) round(sd(i),4))[,2], # sd
-aggregate(base[,i] ~ base[,73], base, function(i) round(IQR(i),4))[,2], # IQR
-aggregate(base[,i] ~ base[,73], base, function(i) round(quantile(i, probs=0.25),4))[,2], # Q1
-aggregate(base[,i] ~ base[,73], base, function(i) round(quantile(i, probs=0.75),4))[,2]) # Q3
-
-result <- cbind(c("min", "max", "sd", "IQR", "Q1", "Q3"), as.data.frame(val))
 
