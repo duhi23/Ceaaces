@@ -36,7 +36,8 @@ base$oferta <- factor(base$oferta, levels=c("Pregrado", "Posgrado", "Pregrado y 
 base$region <- factor(base$region, levels=c("Costa", "Sierra", "Amazonia"))
 base$mantenimiento <- factor(base$mantenimiento, levels=c("Publica", "Privada", "Cofinanciada"))
 base$distrito <- factor(base$distrito, levels=c("Guayas", "Pichincha", "Otros"))
-
+# Intervalos - Numero de estudiantes
+base$intervalos <- cut(base$nestudiantes, breaks=c(0,2000,6062,13320,73032), dig.lab=5)
 
 library(ggplot2)
 library(stringr)
@@ -59,24 +60,26 @@ for(i in c(2:72)){
 }
 
 est <- function(i){
-  val <- rbind(aggregate(base[,i] ~ base[,85], base, function(i) round(min(i),4))[,2], # min
-               aggregate(base[,i] ~ base[,85], base, function(i) round(max(i),4))[,2], # max
-               aggregate(base[,i] ~ base[,85], base, function(i) round(median(i),4))[,2], # median
-               aggregate(base[,i] ~ base[,85], base, function(i) round(sd(i),4))[,2], # sd
-               aggregate(base[,i] ~ base[,85], base, function(i) round(IQR(i),4))[,2], # IQR
-               aggregate(base[,i] ~ base[,85], base, function(i) round(quantile(i, probs=0.25),4))[,2], # Q1
-               aggregate(base[,i] ~ base[,85], base, function(i) round(quantile(i, probs=0.75),4))[,2]) # Q3
+  val <- rbind(aggregate(base[,i] ~ base[,87], base, function(i) round(min(i),4))[,2], # min
+               aggregate(base[,i] ~ base[,87], base, function(i) round(max(i),4))[,2], # max
+               aggregate(base[,i] ~ base[,87], base, function(i) round(median(i),4))[,2], # median
+               aggregate(base[,i] ~ base[,87], base, function(i) round(sd(i),4))[,2], # sd
+               aggregate(base[,i] ~ base[,87], base, function(i) round(IQR(i),4))[,2], # IQR
+               aggregate(base[,i] ~ base[,87], base, function(i) round(quantile(i, probs=0.25),4))[,2], # Q1
+               aggregate(base[,i] ~ base[,87], base, function(i) round(quantile(i, probs=0.75),4))[,2]) # Q3
   result <- cbind(c("min", "max", "median", "sd", "IQR", "Q1", "Q3"), as.data.frame(val))
-  colnames(result) <- c("nom", unlist(dimnames(table(base[,85]))))
+  colnames(result) <- c("nom", unlist(dimnames(table(base[,87]))))
   return(result)
 }
 
-# Intervalos - Numero de estudiantes
-base$intervalos <- cut(base$nestudiantes, breaks=c(0,2000,6062,13320,73032), dig.lab=5)
 
+library(plyr)
+library(TeachingDemos)
+source("boxout.R")
 
-
-
+# Valores atipicos
+boxout(base[[3]]~base[[83]], base$Codigo, push_text_right = .6, range = .2,
+                           segement_width_as_percent_of_label_dist = 0.35, data=base, spread_text = F)
 
 
 
