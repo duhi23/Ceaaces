@@ -78,7 +78,7 @@ library(TeachingDemos)
 source("boxout.R")
 
 # Valores atipicos
-boxout(base[[3]]~base[[83]], base$Codigo, push_text_right = .6, range = .2,
+boxplot.with.outlier.label(base[,7]~base[,87], base$Codigo, push_text_right = .6, range = .2,
                            segement_width_as_percent_of_label_dist = 0.35, data=base, spread_text = F)
 
 
