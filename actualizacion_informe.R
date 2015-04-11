@@ -72,6 +72,13 @@ est <- function(i){
   return(result)
 }
 
+# Percent over global median 3:7 -- 74 >
+pmda <- function(i,j){
+  100*round(prop.table(table(median(base[,i])>base[,i], base[,j]), 2), 4)
+}
+
+pmda(3,87)
+
 
 library(plyr)
 library(TeachingDemos)
@@ -126,6 +133,17 @@ esta <- function(i){
 }
 
 esta(3)
+
+median(datos[,i])
+unlist(dimnames(table(datos[,8])))
+
+unique(datos[,8])
+
+pmd <- function(i,j){
+  100*round(prop.table(table(median(datos[,i])>datos[,i], datos[,j]), 2), 4)
+}
+
+pmd(3,8)
 
 
 # Valores atipicos
