@@ -1,5 +1,44 @@
 ## Actualizacion de graficos 
+# Graficos Informe 1
 
+datos <- read.table(file="/Users/Diego/Dropbox/Proyectos/Ceaaces/Datos/base.csv", 
+                   header=TRUE, sep=";", dec=",", stringsAsFactors=FALSE)
+
+vari <- c("Codigo", "Nombre", "Formacion posgrado", "Posgrado en formacion", "Doctores TC", "Estudiantes por docente TC",
+"Horas clase TC", "Porcentaje de profesores TC", "Horas-clase MT-TP", "Titularidad", "Titularidad TC", "Concurso",
+"Escalafon", "Evaluacion", "Remuneracion TC", "Remuneracion MT-TP", "Direccion mujeres", "Docencia mujeres", 
+"Eficiencia terminal posgrado", "Eficiencia terminal pregrado", "Tasa de retencion inicial pregrado",
+"Admision a estudios de pregrado", "Admision a estudios de posgrado", "Planificacion de la investigacion",
+"Investigacion regional", "Produccion cientifica", "Libros revisados por pares", "Uso del seguimiento a graduados",
+"Programas de vinculacion", "Presupuesto de programas de vinculacion", "Rendicion anual de cuentas",
+"Transparencia financiera", "Etica y responsabilidad", "Calidad del gasto", "Informacion para la evaluacion",
+"Regimen academico", "Accion afirmativa", "Espacio para estudiantes", "Titulos de libros", "Gestion de biblioteca", 
+"Consultas por usuario", "Conectividad", "Innovacion tecnologica", "Cobertura a estudiantes", "Calidad de aulas", 
+"Oficinas TC", "Oficinas MT-TP", "Espacios de bienestar", "oferta", "mantenimiento")
+
+datos$mantenimiento <- factor(datos$mantenimiento, levels=c("Publica", "Privada", "Cofinanciada"))
+
+library(ggplot2)
+library(stringr)
+colores <- c("green4", "deepskyblue3", "goldenrod3", "gold", "darkorange", "deepskyblue1", "orange", "orangered", "hotpink" )
+
+for(i in c(3,4,5,6,7,8,9,10,11,12,15,16,17,18,19,20,21,25,26,27,29,30,34,38,39,41,42,44,45,46,47)){
+  mypath <- file.path("","Users","Diego","Dropbox","Proyectos","Ceaaces","Actualizacion","Informe N1",
+                      paste(vari[i], "_informe", ".png", sep = ""))
+  png(file=mypath)
+  grafico <- ggplot(datos, aes(x=datos[,50], y=datos[,i], fill=as.factor(datos[,50]))) + labs(x=" ") +
+    geom_boxplot(outlier.colour="red",outlier.shape=16, outlier.size=4) + labs(fill=" ") + labs(title=vari[i]) +
+    labs(y="Indicador")+stat_boxplot(geom ='errorbar') + scale_fill_manual(values=colores) +
+    theme(legend.position="none") + theme(text = element_text(size=15)) +
+    annotate("segment",x=0.5, xend=4.5, y=median(datos[,i]), yend=median(datos[,i]), colour="red2", linetype="dotted", size=1.1)
+  print(grafico)
+  dev.off()
+}
+
+c(3,4,5,6,7,8,9,10,11,12,15,16,17,18,19,20,21,25,26,27,29,30,34,38,39,41,42,44,45,46,47)
+
+
+# Graficos Informe 2
 old.dir <- "/Users/Diego/Dropbox/Proyectos/Ceaaces"
 new.dir <- "/Users/Diego/Dropbox/Proyectos/Ceaaces/Datos"
 
