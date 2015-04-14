@@ -46,10 +46,12 @@ esta <- function(i){
                aggregate(datos[,i] ~ datos[,50], datos, function(i) round(quantile(i, probs=0.75),4))[,2]) # Q3
   result <- cbind(c("min", "max", "median", "sd", "IQR", "Q1", "Q3"), as.data.frame(val))
   colnames(result) <- c("nom", unlist(dimnames(table(datos[,50]))))
-  return(result)
+  return(list(result,colnames(datos)[i]))
 }
 
-esta(3)
+3,4,5,6,7,8,9,10,11,12,15,16,17,18,19,20,21,25,26,27,29,30,34,38,39,41,42,44,45,46,47
+
+esta(7)
 
 
 # Graficos Informe 2
