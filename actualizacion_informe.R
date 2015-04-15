@@ -51,7 +51,7 @@ esta <- function(i){
 
 3,4,5,6,7,8,9,10,11,12,15,16,17,18,19,20,21,25,26,27,29,30,34,38,39,41,42,44,45,46,47
 
-esta(7)
+esta(27)
 
 
 # Graficos Informe 2
@@ -115,17 +115,20 @@ for(i in c(2:72)){
 }
 
 est <- function(i){
-  val <- rbind(aggregate(base[,i] ~ base[,73], base, function(i) round(min(i),4))[,2], # min
-               aggregate(base[,i] ~ base[,73], base, function(i) round(max(i),4))[,2], # max
-               aggregate(base[,i] ~ base[,73], base, function(i) round(median(i),4))[,2], # median
-               aggregate(base[,i] ~ base[,73], base, function(i) round(sd(i),4))[,2], # sd
-               aggregate(base[,i] ~ base[,73], base, function(i) round(IQR(i),4))[,2], # IQR
-               aggregate(base[,i] ~ base[,73], base, function(i) round(quantile(i, probs=0.25),4))[,2], # Q1
-               aggregate(base[,i] ~ base[,73], base, function(i) round(quantile(i, probs=0.75),4))[,2]) # Q3
+  val <- rbind(aggregate(base[,i] ~ base[,74], base, function(i) round(min(i),4))[,2], # min
+               aggregate(base[,i] ~ base[,74], base, function(i) round(max(i),4))[,2], # max
+               aggregate(base[,i] ~ base[,74], base, function(i) round(median(i),4))[,2], # median
+               aggregate(base[,i] ~ base[,74], base, function(i) round(sd(i),4))[,2], # sd
+               aggregate(base[,i] ~ base[,74], base, function(i) round(IQR(i),4))[,2], # IQR
+               aggregate(base[,i] ~ base[,74], base, function(i) round(quantile(i, probs=0.25),4))[,2], # Q1
+               aggregate(base[,i] ~ base[,74], base, function(i) round(quantile(i, probs=0.75),4))[,2]) # Q3
   result <- cbind(c("min", "max", "median", "sd", "IQR", "Q1", "Q3"), as.data.frame(val))
-  colnames(result) <- c("nom", unlist(dimnames(table(base[,73]))))
-  return(result)
+  colnames(result) <- c("nom", unlist(dimnames(table(base[,74]))))
+  return(list(result,colnames(base)[i]))
 }
+
+# Ejecutamos el calculo para toda la base
+lapply(c(40:60), function(i){est(i)})
 
 # Percent over global median 3:7 -- 74 >
 pmda <- function(i,j){
