@@ -49,8 +49,6 @@ esta <- function(i){
   return(list(result,colnames(datos)[i]))
 }
 
-3,4,5,6,7,8,9,10,11,12,15,16,17,18,19,20,21,25,26,27,29,30,34,38,39,41,42,44,45,46,47
-
 esta(27)
 
 
@@ -128,7 +126,7 @@ est <- function(i){
 }
 
 # Ejecutamos el calculo para toda la base
-lapply(c(40:60), function(i){est(i)})
+lapply(c(60:72), function(i){est(i)})
 
 # Percent over global median 3:7 -- 74 >
 pmda <- function(i,j){
