@@ -56,7 +56,7 @@ lapply(c(13,14,22,23,24,28,31,32,33,35,36,37,40,43), function(i){list(table(dato
 
 # Graficos histogramas - variables cualitativas
 
-for(i in c(13,14,22,23,24,28,31,32,33,35,36,37,40,43)){
+for(i in c(13,14,22,23,24,28,31,32,33,35,36,37,40,43,48)){
   mypath <- file.path("","Users","Diego","Dropbox","Proyectos","Ceaaces","Actualizacion","Informe N1",
                       paste(vari[i], "_cualitativa", ".png", sep = ""))
   png(file=mypath)
@@ -159,7 +159,7 @@ library(TeachingDemos)
 source("boxout.R")
 
 # Valores atipicos
-boxplot.with.outlier.label(base[,6]~base[,74], base$Codigo, push_text_right = .6, range = .2,
+boxplot.with.outlier.label(base[,2]~base[,74], base$Codigo, push_text_right = .6, range = .2,
                            segement_width_as_percent_of_label_dist = 0.35, data=base, spread_text = F)
 
 # Creacion base para analizar los campos CINE
