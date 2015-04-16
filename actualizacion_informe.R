@@ -52,7 +52,7 @@ esta <- function(i){
 esta(27)
 
 
-lapply(c(13,14,22,23,24,28,31,32,33,35,36,37,40,43), function(i){list(table(datos[[i]],datos[[50]]), colnames(datos)[i])})
+lapply(c(13,14,22,23,24,28,31,32,33,35,36,37,40,43,48), function(i){list(table(datos[[i]],datos[[50]]), colnames(datos)[i])})
 
 # Graficos histogramas - variables cualitativas
 
@@ -68,7 +68,10 @@ for(i in c(13,14,22,23,24,28,31,32,33,35,36,37,40,43,48)){
   dev.off()
 }
 
-
+# Distribucion de IES
+ggplot(datos, aes(x=datos[["mantenimiento"]], fill=as.factor(datos[["mantenimiento"]]))) + geom_histogram(binwidth=4)+
+  scale_fill_manual(values=colores) + labs(x=" ") + labs(title="Tipo de Financiamiento") + labs(fill="Financiamiento") +
+  labs(y="CASOS") + theme(text=element_text(size=14), legend.position="right")
 
 # Graficos Informe 2
 old.dir <- "/Users/Diego/Dropbox/Proyectos/Ceaaces"
@@ -193,7 +196,7 @@ for(i in c(2:7)){
 }
 
 
-esta <- function(i){
+esti <- function(i){
   val <- rbind(aggregate(datos[,i] ~ datos[,8], datos, function(i) round(min(i),4))[,2], # min
                aggregate(datos[,i] ~ datos[,8], datos, function(i) round(max(i),4))[,2], # max
                aggregate(datos[,i] ~ datos[,8], datos, function(i) round(median(i),4))[,2], # median
@@ -206,7 +209,7 @@ esta <- function(i){
   return(result)
 }
 
-esta(3)
+esti(3)
 
 median(datos[,i])
 unlist(dimnames(table(datos[,8])))
