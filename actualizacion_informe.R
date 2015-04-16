@@ -52,6 +52,11 @@ esta <- function(i){
 esta(27)
 
 
+3,4,5,6,7,8,9,10,11,12,15,16,17,18,19,20,21,25,26,27,29,30,34,38,39,41,42,44,45,46,47
+
+lapply(c(13,14,22,23,24,28,31,32,33,35,36,37,40,43), function(i){list(table(datos[[i]],datos[[50]]), colnames(datos)[i])})
+
+
 # Graficos Informe 2
 old.dir <- "/Users/Diego/Dropbox/Proyectos/Ceaaces"
 new.dir <- "/Users/Diego/Dropbox/Proyectos/Ceaaces/Datos"
