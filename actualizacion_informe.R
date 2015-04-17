@@ -224,6 +224,6 @@ pmd(3,8)
 
 
 # Valores atipicos
-boxplot.with.outlier.label(datos[,3] ~ datos[,8], datos$Codigo, push_text_right = .6, range = .2,
+boxplot.with.outlier.label(datos[,6] ~ datos[,8], datos$Codigo, push_text_right = .6, range = .2,
                            segement_width_as_percent_of_label_dist = 0.35, data=datos, spread_text = F)
 
