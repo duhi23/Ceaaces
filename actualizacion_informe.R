@@ -167,18 +167,18 @@ boxplot.with.outlier.label(base[,2]~base[,74], base$Codigo, push_text_right = .6
 
 # Creacion base para analizar los campos CINE
 
-campo1 <- data.frame(subset(base, base$CA01=="SI")[,1:7], campo=rep(1,45))
-campo2 <- data.frame(subset(base, base$CA02=="SI")[,1:7], campo=rep(2,39))
-campo3 <- data.frame(subset(base, base$CA03=="SI")[,1:7], campo=rep(3,53))
-campo5 <- data.frame(subset(base, base$CA05=="SI")[,1:7], campo=rep(5,49))
-campo7 <- data.frame(subset(base, base$CA07=="SI")[,1:7], campo=rep(7,43))
-campo8 <- data.frame(subset(base, base$CA08=="SI")[,1:7], campo=rep(8,35))
-campo9 <- data.frame(subset(base, base$CA09=="SI")[,1:7], campo=rep(9,42))
-campo10 <- data.frame(subset(base, base$CA10=="SI")[,1:7], campo=rep(10,44))
+campo1 <- data.frame(subset(base, base$CA01==1)[,1:7], campo=rep(1,37))
+campo2 <- data.frame(subset(base, base$CA02==1)[,1:7], campo=rep(2,37))
+campo3 <- data.frame(subset(base, base$CA03==1)[,1:7], campo=rep(3,52))
+campo4 <- data.frame(subset(base, base$CA04==1)[,1:7], campo=rep(4,42))
+campo5 <- data.frame(subset(base, base$CA05==1)[,1:7], campo=rep(5,38))
+campo6 <- data.frame(subset(base, base$CA06==1)[,1:7], campo=rep(6,32))
+campo7 <- data.frame(subset(base, base$CA07==1)[,1:7], campo=rep(7,35))
+campo8 <- data.frame(subset(base, base$CA08==1)[,1:7], campo=rep(8,41))
 
-datos <- rbind(campo1, campo2, campo3, campo5, campo7, campo8, campo9, campo10)
-datos$ncampo <- factor(datos$campo, levels=c(1,2,3,4,5,6,7,8,9,10), 
-                      labels=c("CA01", "CA02", "CA03", "CA04", "CA05", "CA06", "CA07", "CA08", "CA09", "CA10"))
+datos <- rbind(campo1, campo2, campo3, campo4, campo5, campo6, campo7, campo8)
+datos$ncampo <- factor(datos$campo, levels=c(1,2,3,4,5,6,7,8), 
+                      labels=c("CA01", "CA02", "CA03", "CA04", "CA05", "CA06", "CA07", "CA08"))
 
 
 
@@ -197,15 +197,15 @@ for(i in c(2:7)){
 
 
 esti <- function(i){
-  val <- rbind(aggregate(datos[,i] ~ datos[,8], datos, function(i) round(min(i),4))[,2], # min
-               aggregate(datos[,i] ~ datos[,8], datos, function(i) round(max(i),4))[,2], # max
-               aggregate(datos[,i] ~ datos[,8], datos, function(i) round(median(i),4))[,2], # median
-               aggregate(datos[,i] ~ datos[,8], datos, function(i) round(sd(i),4))[,2], # sd
-               aggregate(datos[,i] ~ datos[,8], datos, function(i) round(IQR(i),4))[,2], # IQR
-               aggregate(datos[,i] ~ datos[,8], datos, function(i) round(quantile(i, probs=0.25),4))[,2], # Q1
-               aggregate(datos[,i] ~ datos[,8], datos, function(i) round(quantile(i, probs=0.75),4))[,2]) # Q3
+  val <- rbind(aggregate(datos[,i] ~ datos[,9], datos, function(i) round(min(i),4))[,2], # min
+               aggregate(datos[,i] ~ datos[,9], datos, function(i) round(max(i),4))[,2], # max
+               aggregate(datos[,i] ~ datos[,9], datos, function(i) round(median(i),4))[,2], # median
+               aggregate(datos[,i] ~ datos[,9], datos, function(i) round(sd(i),4))[,2], # sd
+               aggregate(datos[,i] ~ datos[,9], datos, function(i) round(IQR(i),4))[,2], # IQR
+               aggregate(datos[,i] ~ datos[,9], datos, function(i) round(quantile(i, probs=0.25),4))[,2], # Q1
+               aggregate(datos[,i] ~ datos[,9], datos, function(i) round(quantile(i, probs=0.75),4))[,2]) # Q3
   result <- cbind(c("min", "max", "median", "sd", "IQR", "Q1", "Q3"), as.data.frame(val))
-  colnames(result) <- c("nom", unlist(dimnames(table(datos[,8]))))
+  colnames(result) <- c("nom", unlist(dimnames(table(datos[,9]))))
   return(result)
 }
 
@@ -217,13 +217,13 @@ unlist(dimnames(table(datos[,8])))
 unique(datos[,8])
 
 pmd <- function(i,j){
-  100*round(prop.table(table(median(datos[,i])>datos[,i], datos[,j]), 2), 4)
+  100*round(prop.table(table(median(base[,i])>base[,i], base[,j]), 2), 4)
 }
 
-pmd(3,8)
+pmd(3,74)
 
 
 # Valores atipicos
-boxplot.with.outlier.label(datos[,6] ~ datos[,8], datos$Codigo, push_text_right = .6, range = .2,
+boxplot.with.outlier.label(datos[,6] ~ datos[,9], datos$Codigo, push_text_right = .6, range = .2,
                            segement_width_as_percent_of_label_dist = 0.35, data=datos, spread_text = F)
 
