@@ -119,15 +119,15 @@ library(stringr)
 colores <- c("green4", "deepskyblue3", "goldenrod3", "gold", "darkorange", "deepskyblue1", "orange", "orangered", "hotpink" )
 
 for(i in c(2:72)){
-  mypath <- file.path("","Users","Diego","Dropbox","Proyectos","Ceaaces","Actualizacion","Oferta",
-                      paste(var[i], "_oferta", ".png", sep = ""))
+  mypath <- file.path("","Users","Diego","Dropbox","Proyectos","Ceaaces","Actualizacion","Categoria",
+                      paste(var[i], "_categoria", ".png", sep = ""))
   png(file=mypath)
-  grafico <- ggplot(base, aes(x=base[,73], y=base[,i], fill=as.factor(base[,73]))) + labs(x=" ") +
+  grafico <- ggplot(base, aes(x=base[,84], y=base[,i], fill=as.factor(base[,84]))) + labs(x=" ") +
     geom_boxplot(outlier.colour="red",outlier.shape=16, outlier.size=4) + labs(fill=" ") + labs(title=var[i]) +
     labs(y="Indicador")+stat_boxplot(geom ='errorbar') + scale_fill_manual(values=colores) +
     theme(legend.position="none") + theme(text = element_text(size=15)) +
-    #annotate("text",y=aggregate(base[,i] ~ base[,73], base, function(i) round(median(i),2))[,2],
-    #         x=c(1,2,3), label=str_replace(aggregate(base[,i] ~ base[,73], base, function(i) round(median(i),2))[,2], "0.","0,"), size=6, colour="snow") +
+    #annotate("text",y=aggregate(base[,i] ~ base[,84], base, function(i) round(median(i),2))[,2],
+    #         x=c(1,2,3), label=str_replace(aggregate(base[,i] ~ base[,84], base, function(i) round(median(i),2))[,2], "0.","0,"), size=6, colour="snow") +
     annotate("segment",x=0.5, xend=4.5, y=median(base[,i]), yend=median(base[,i]), colour="red2", linetype="dotted", size=1.1)
   print(grafico)
   dev.off()
