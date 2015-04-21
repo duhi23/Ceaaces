@@ -134,20 +134,29 @@ for(i in c(2:72)){
 }
 
 est <- function(i){
-  val <- rbind(aggregate(base[,i] ~ base[,74], base, function(i) round(min(i),4))[,2], # min
-               aggregate(base[,i] ~ base[,74], base, function(i) round(max(i),4))[,2], # max
-               aggregate(base[,i] ~ base[,74], base, function(i) round(median(i),4))[,2], # median
-               aggregate(base[,i] ~ base[,74], base, function(i) round(sd(i),4))[,2], # sd
-               aggregate(base[,i] ~ base[,74], base, function(i) round(IQR(i),4))[,2], # IQR
-               aggregate(base[,i] ~ base[,74], base, function(i) round(quantile(i, probs=0.25),4))[,2], # Q1
-               aggregate(base[,i] ~ base[,74], base, function(i) round(quantile(i, probs=0.75),4))[,2]) # Q3
+  val <- rbind(aggregate(base[,i] ~ base[,84], base, function(i) round(min(i),4))[,2], # min
+               aggregate(base[,i] ~ base[,84], base, function(i) round(max(i),4))[,2], # max
+               aggregate(base[,i] ~ base[,84], base, function(i) round(median(i),4))[,2], # median
+               aggregate(base[,i] ~ base[,84], base, function(i) round(sd(i),4))[,2], # sd
+               aggregate(base[,i] ~ base[,84], base, function(i) round(IQR(i),4))[,2], # IQR
+               aggregate(base[,i] ~ base[,84], base, function(i) round(quantile(i, probs=0.25),4))[,2], # Q1
+               aggregate(base[,i] ~ base[,84], base, function(i) round(quantile(i, probs=0.75),4))[,2]) # Q3
   result <- cbind(c("min", "max", "median", "sd", "IQR", "Q1", "Q3"), as.data.frame(val))
-  colnames(result) <- c("nom", unlist(dimnames(table(base[,74]))))
+  colnames(result) <- c("nom", unlist(dimnames(table(base[,84]))))
   return(list(result,colnames(base)[i]))
 }
 
+est(11)
 # Ejecutamos el calculo para toda la base
 lapply(c(60:72), function(i){est(i)})
+
+library(plyr)
+library(TeachingDemos)
+source("boxout.R")
+
+# Valores atipicos
+boxplot.with.outlier.label(base[,11]~base[,84], base$Codigo, push_text_right = .6, range = .2,
+                           segement_width_as_percent_of_label_dist = 0.35, data=base, spread_text = F)
 
 # Percent over global median 3:7 -- 74 >
 pmda <- function(i,j){
@@ -156,14 +165,6 @@ pmda <- function(i,j){
 
 pmda(3,87)
 
-
-library(plyr)
-library(TeachingDemos)
-source("boxout.R")
-
-# Valores atipicos
-boxplot.with.outlier.label(base[,2]~base[,74], base$Codigo, push_text_right = .6, range = .2,
-                           segement_width_as_percent_of_label_dist = 0.35, data=base, spread_text = F)
 
 # Creacion base para analizar los campos CINE
 
