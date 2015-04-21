@@ -1,5 +1,5 @@
 ## Actualizacion de graficos 
-# Graficos Informe 1
+# Graficos Informe 1 _ Indicadores/Macrocriterios
 
 datos <- read.table(file="/Users/Diego/Dropbox/Proyectos/Ceaaces/Datos/base.csv", 
                    header=TRUE, sep=";", dec=",", stringsAsFactors=FALSE)
@@ -35,7 +35,6 @@ for(i in c(3,4,5,6,7,8,9,10,11,12,15,16,17,18,19,20,21,25,26,27,29,30,34,38,39,4
   dev.off()
 }
 
-
 esta <- function(i){
   val <- rbind(aggregate(datos[,i] ~ datos[,50], datos, function(i) round(min(i),4))[,2], # min
                aggregate(datos[,i] ~ datos[,50], datos, function(i) round(max(i),4))[,2], # max
@@ -50,7 +49,6 @@ esta <- function(i){
 }
 
 esta(27)
-
 
 lapply(c(13,14,22,23,24,28,31,32,33,35,36,37,40,43,48), function(i){list(table(datos[[i]],datos[[50]]), colnames(datos)[i])})
 
@@ -67,6 +65,7 @@ for(i in c(13,14,22,23,24,28,31,32,33,35,36,37,40,43,48)){
   print(grafico)
   dev.off()
 }
+
 
 # Distribucion de IES
 ggplot(datos, aes(x=datos[["mantenimiento"]], fill=as.factor(datos[["mantenimiento"]]))) + geom_histogram(binwidth=4)+
@@ -180,7 +179,6 @@ campo8 <- data.frame(subset(base, base$CA08==1)[,1:7], campo=rep(8,41))
 datos <- rbind(campo1, campo2, campo3, campo4, campo5, campo6, campo7, campo8)
 datos$ncampo <- factor(datos$campo, levels=c(1,2,3,4,5,6,7,8), 
                       labels=c("CA01", "CA02", "CA03", "CA04", "CA05", "CA06", "CA07", "CA08"))
-
 
 
 for(i in c(2:7)){
