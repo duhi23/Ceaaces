@@ -53,7 +53,6 @@ esta(27)
 lapply(c(13,14,22,23,24,28,31,32,33,35,36,37,40,43,48), function(i){list(table(datos[[i]],datos[[50]]), colnames(datos)[i])})
 
 # Graficos histogramas - variables cualitativas
-
 for(i in c(13,14,22,23,24,28,31,32,33,35,36,37,40,43,48)){
   mypath <- file.path("","Users","Diego","Dropbox","Proyectos","Ceaaces","Actualizacion","Informe N1",
                       paste(vari[i], "_cualitativa", ".png", sep = ""))
@@ -61,11 +60,14 @@ for(i in c(13,14,22,23,24,28,31,32,33,35,36,37,40,43,48)){
   datos[[i]] <- factor(datos[[i]], levels=c("ALTO","MEDIO","BAJO"))
   grafico <- ggplot(datos, aes(x=datos[[i]], fill=as.factor(datos[[i]]))) + geom_histogram(binwidth=4)+
     scale_fill_manual(values=colores) + labs(x=" ") + labs(title=vari[i]) + labs(fill="NIVEL") +
-    labs(y="CASOS") + theme(text=element_text(size=14), legend.position="none") + facet_grid(.~ mantenimiento)
+    labs(y="CASOS") + theme(text=element_text(size=14), legend.position="none") + facet_grid(. ~ mantenimiento)
   print(grafico)
   dev.off()
 }
 
+ggplot(datos, aes(x=datos[[i]], fill=as.factor(datos[[i]]))) + geom_histogram(binwidth=1)+
+  scale_fill_manual(values=colores) + labs(x=" ") + labs(title=vari[i]) + labs(fill="NIVEL") +
+  labs(y="CASOS") + theme(text=element_text(size=14), legend.position="none") + facet_grid(mantenimiento ~ .)
 
 # Distribucion de IES
 ggplot(datos, aes(x=datos[["mantenimiento"]], fill=as.factor(datos[["mantenimiento"]]))) + geom_histogram(binwidth=4)+
