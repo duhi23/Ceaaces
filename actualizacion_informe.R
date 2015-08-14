@@ -11,7 +11,7 @@ vari <- c("Codigo", "Nombre", "Formacion posgrado", "Posgrado en formacion", "Do
 "Admision a estudios de pregrado", "Admision a estudios de posgrado", "Planificacion de la investigacion",
 "Investigacion regional", "Produccion cientifica", "Libros revisados por pares", "Uso del seguimiento a graduados",
 "Programas de vinculacion", "Presupuesto de programas de vinculacion", "Rendicion anual de cuentas",
-"Transparencia financiera", "Etica y responsabilidad", "Calidad del gasto", "Informacion para la evaluacion",
+"Transparencia financiera", "Etica y responsabilidad", "Calidad del gasto", "Informacion para la evaluacion",
 "Regimen academico", "Accion afirmativa", "Espacio para estudiantes", "Titulos de libros", "Gestion de biblioteca", 
 "Consultas por usuario", "Conectividad", "Innovacion tecnologica", "Cobertura a estudiantes", "Calidad de aulas", 
 "Oficinas TC", "Oficinas MT-TP", "Espacios de bienestar", "oferta", "mantenimiento")
