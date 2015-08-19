@@ -41,19 +41,28 @@ summary(modelo)
 
 data <- data %>% mutate(EST= -0.5961489 + 0.0024294*FORMACIONPOSGRADO -0.0048324*HORASCLASESMTTP + 0.0006680*CONCURSO +0.1101033*log(REMUNERACIONTC)+
                           0.1372203*sqrt(LIBROSREVISADOSPORPARES) + 0.0315445*log(CONECTIVIDAD + 0.1) + 0.0073168*sqrt(COBERTURAAESTUDIANTES) -0.0019802*OFICINASMTTP +
-                          0.0458477*sqrt(PRODUCCIONCIENTIFICA), dif= abs(EST-VALORACION))
+                          0.0458477*sqrt(PRODUCCIONCIENTIFICA), dif= EST-VALORACION)
 
 data$dife <- data %>% mutate(NEW_CAL=ifelse(round(EST,2) >= 0.6, "A", ifelse(round(EST,2) >= 0.45, "B", ifelse(round(EST,2) >= 0.35, "C", "D"))))
 
 table(data$CATEGORIA, data$NEW_CAL)
 
-data <- data %>% mutate(dife = EST-VALORACION) %>% select(dife)
-plot(cbind(seq(1,54), dife), ylim=c(-0.1, 0.1), xlim=c(0,60), xlab="IES", ylab="Diferencia")
+data2 <- tbl_df(cbind(index=seq(1,54), data))
 
-data %>% select(NOMBRE) %>% filter(dife < -0.05)
+dife1 <- data2 %>% mutate(dife = EST-VALORACION) %>% select(index, dife) %>% filter(between(dife, -0.05, 0.05)) 
+dife2 <- data2 %>% mutate(dife = EST-VALORACION) %>% select(index, dife) %>% filter(dife < -0.05) 
+dife3 <- data2 %>% mutate(dife = EST-VALORACION) %>% select(index, dife) %>% filter(dife > 0.05)
 
+plot(dife1, ylim=c(-0.1, 0.1), xlim=c(0,60), xlab="IES", ylab="Diferencia", col='green', pch=16, main="Residuos")
+par(new=TRUE)
+plot(dife2, ylim=c(-0.1, 0.1), xlim=c(0,60), xlab="IES", ylab="Diferencia", col='red', pch=16)
+par(new=TRUE)
+plot(dife3, ylim=c(-0.1, 0.1), xlim=c(0,60), xlab="IES", ylab="Diferencia", col='red', pch=16)
+
+abline(a = -0.05, b = 0, col = "blue", lty = 5)
+abline(a = 0.05, b = 0, col = "blue", lty = 5)
 # Resumen diferencia
-dife %>% summary()
+data %>% select(CODIGO, NOMBRE, dif) %>% filter(dif < -0.05)
 
 # Estadisticos por Categoria
 by(data$VALORACION, data$CATEGORIA, summary)
