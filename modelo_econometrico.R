@@ -1,4 +1,7 @@
 ### Modelo Econometrico ###
+install.packages('QuantPsyc', dependencies = TRUE)
+
+library(QuantPsyc)
 library(dplyr)
 library(readxl)
 library(rpart)
