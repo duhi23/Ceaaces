@@ -46,9 +46,12 @@ data <- data %>% mutate(EST= -0.5961489 + 0.0024294*FORMACIONPOSGRADO -0.0048324
                           0.1372203*sqrt(LIBROSREVISADOSPORPARES) + 0.0315445*log(CONECTIVIDAD + 0.1) + 0.0073168*sqrt(COBERTURAAESTUDIANTES) -0.0019802*OFICINASMTTP +
                           0.0458477*sqrt(PRODUCCIONCIENTIFICA), dif= EST-VALORACION)
 
-data$dife <- data %>% mutate(NEW_CAL=ifelse(round(EST,2) >= 0.6, "A", ifelse(round(EST,2) >= 0.45, "B", ifelse(round(EST,2) >= 0.35, "C", "D"))))
+data <- data %>% mutate(NEW_CAL=ifelse(round(EST,2) >= 0.6, "A", ifelse(round(EST,2) >= 0.45, "B", ifelse(round(EST,2) >= 0.35, "C", "D"))))
 
+data %>% select(NEW_CAL)
 table(data$CATEGORIA, data$NEW_CAL)
+
+data %>% select(CODIGO, NOMBRE, CATEGORIA, NEW_CAL) %>% filter(CATEGORIA != NEW_CAL)
 
 data2 <- tbl_df(cbind(index=seq(1,54), data))
 
@@ -76,3 +79,12 @@ data %>% select(VALORACION, EST, CATEGORIA, NEW_CAL) %>% tail(30)
 
 ## Error en la estimacion
 1-(5+18+15+6)/54
+
+
+##### Shapiro Wills #####
+
+data %>% select(dif) %>% unlist() %>% shapiro.test()
+data %>% select(dif) %>% unlist() %>% qqnorm()
+data %>% select(dif) %>% unlist() %>% qqline()
+
+
