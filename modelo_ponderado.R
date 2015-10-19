@@ -11,6 +11,12 @@ list.files()
 data <- read_excel('base_ponderada.xlsx', sheet=1, col_names = TRUE)
 glimpse(data)
 
+prepos <- c(1001, 1002, 1003, 1005, 1006, 1007, 1008, 1010, 1011, 1012, 1013, 1014, 1015, 1016, 1017, 1018, 1019, 1020, 1021,
+              1024, 1025, 1027, 1028, 1030, 1031, 1032, 1033, 1034, 1036, 1037, 1038, 1040, 1041, 1042, 1044, 1045, 1049,
+              1050, 1051, 1053, 1056)
+
+data <- data %>% filter(Código %in% prepos)
+
 #### Graficas
 
 plot(cbind(data$EvaluacionGlobalIES, sqrt(data$Consultasporusuario)))
