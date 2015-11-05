@@ -45,8 +45,8 @@ PosgradoenFormacion
 Librosrevisadosporpares
 
 
-data <- data %>% mutate(EST= 0.21452 + 0.97072*Produccioncientifica + 2.45186*TitularidadTC + 3.96950*Informacionparalaevaluacion + 
-                  4.42327*Formacionposgrado + 3.81179*Conectividad + 2.02324*Planificaciondelainvestigacion, dif= EST-EvaluacionGlobalIES)
+data <- data %>% mutate(EST= 0.23416 + 1.20096*Produccioncientifica + 2.25966*TitularidadTC + 5.65325*Informacionparalaevaluacion + 
+                  2.76458*Formacionposgrado + 4.02928*Conectividad + 2.06669*Planificaciondelainvestigacion, dif= EST-EvaluacionGlobalIES)
 
 data <- data %>% mutate(NEW_CAL=ifelse(round(EST,2) >= 0.6, "A", ifelse(round(EST,2) >= 0.45, "B", ifelse(round(EST,2) >= 0.35, "C", "D"))))
 
@@ -54,7 +54,7 @@ table(data$categoria, data$NEW_CAL)
 
 data %>% select(Código, categoria, NEW_CAL) %>% filter(categoria != NEW_CAL)
 
-data2 <- tbl_df(cbind(index=seq(1,54), data))
+data2 <- tbl_df(cbind(index=seq(1,41), data))
 dife1 <- data2 %>% select(index, dif) %>% filter(between(dif, -0.05, 0.05)) 
 dife2 <- data2 %>% select(index, dif) %>% filter(dif < -0.05) 
 dife3 <- data2 %>% select(index, dif) %>% filter(dif > 0.05)
