@@ -1,5 +1,8 @@
-## Actualizacion de graficos 
-# Graficos Informe 1 _ Indicadores/Macrocriterios
+#############################################
+#####     Actualizacion de graficos     #####
+###  Graficos Indicadores/Macrocriterios  ###
+#############################################
+
 
 datos <- read.table(file="/Users/Diego/Dropbox/Proyectos/Ceaaces/Datos/base.csv", 
                    header=TRUE, sep=";", dec=",", stringsAsFactors=FALSE)
