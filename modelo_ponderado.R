@@ -72,9 +72,10 @@ abline(a = 0.05, b = 0, col = "blue", lty = 5)
 data %>% select(Código, dif) %>% filter(dif < -0.05)
 data %>% select(Código, dif) %>% filter(dif > 0.05)
 
-
+# Pruebas de normalidad errores
 data %>% select(dif) %>% unlist() %>% shapiro.test()
 data %>% select(dif) %>% unlist() %>% qqnorm()
 data %>% select(dif) %>% unlist() %>% qqline()
 
+# Matriz cruzada
 data %>% select(Código, categoria, NEW_CAL) %>% filter(categoria != NEW_CAL)
