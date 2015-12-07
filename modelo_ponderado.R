@@ -30,6 +30,8 @@ summary(modelo)
 
 lm.beta(modelo)
 
+data %>% select(Produccioncientifica, TitularidadTC, Informacionparalaevaluacion, Formacionposgrado, Conectividad, Planificaciondelainvestigacion) %>% apply(.,2,range)
+
 
 Investigacionregional
 Escalafon1 **
