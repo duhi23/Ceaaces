@@ -2,7 +2,11 @@
 ############ Códigos generación de Histogrmas    ###############
 ################################################################
 
+
 library(ggplot2)
+library(ggvis)
+library(dplyr)
+
 
 # Escalafon
 ggplot(datos, aes(x=Escalaf.n, fill=as.factor(Escalaf.n))) + geom_histogram(binwidth=1)+
